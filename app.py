@@ -8,8 +8,8 @@ from flask import Flask, request
 app = Flask(__name__)
 
 
-mssg_array=["Fuck StackOverflow","I hate Java, do you?","JavaScript is awesome","Who uses IRC anymore tbh","Windows should be illegal"]
-
+#mssg_array=["Fuck StackOverflow","I hate Java, do you?","JavaScript is awesome","Who uses IRC anymore tbh","Windows should be illegal"]
+msg_array={"when":"We meet at wednesdays at 5 PM at Au Sable","count":"We have around 20 members","prez":"Prithaj","vprez":"Alex"}
 
 
 @app.route('/', methods=['GET'])
@@ -41,9 +41,19 @@ def webhook():
 
                     sender_id = messaging_event["sender"]["id"]        # the facebook ID of the person sending you the message
                     recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
-                    message_text = messaging_event["message"]["text"]  # the message's text
+                    message_text = str(messaging_event["message"]["text"])  # the message's text
 
-                    send_message(sender_id, mssg_array[random.randint(0,4)])
+                    if "when" in message_text:
+                        send_message(sender_id, msg_array["when"])
+                    elif "president"in message_text:
+                        send_message(sender_id, msg_array["prez"])
+                    elif "vice" and "president" in message_text:
+                        send_message(sender_id, msg_array["vprez"])
+                    elif "many" in message_text:
+                        send_message(sender_id, msg_array["count"])
+                
+
+                    
 
                 if messaging_event.get("delivery"):  # delivery confirmation
                     pass
@@ -58,6 +68,7 @@ def webhook():
 
 
 def send_message(recipient_id, message_text):
+    
 
     log("sending message to {recipient}: {text}".format(recipient=recipient_id, text=message_text))
 
