@@ -1,11 +1,15 @@
 import os
 import sys
 import json
-
+import random
 import requests
 from flask import Flask, request
 
 app = Flask(__name__)
+
+
+mssg_array=["Fuck StackOverflow","I hate Java, do you?","JavaScript is awesome","Who uses IRC anymore tbh","Windows should be illegal"]
+
 
 
 @app.route('/', methods=['GET'])
@@ -39,7 +43,7 @@ def webhook():
                     recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
                     message_text = messaging_event["message"]["text"]  # the message's text
 
-                    send_message(sender_id, "got it, thanks!")
+                    send_message(sender_id, mssg_array[random.randint(0,4)])
 
                 if messaging_event.get("delivery"):  # delivery confirmation
                     pass
