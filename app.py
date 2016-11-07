@@ -47,7 +47,7 @@ def webhook():
                         send_message(sender_id, msg_array["when"])
                     elif "president"in message_text:
                         send_message(sender_id, msg_array["prez"])
-                    elif "vice" and "president" in message_text:
+                    elif "vice" in message_text:
                         send_message(sender_id, msg_array["vprez"])
                     elif "many" in message_text:
                         send_message(sender_id, msg_array["count"])
