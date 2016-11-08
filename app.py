@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 
 #mssg_array=["Fuck StackOverflow","I hate Java, do you?","JavaScript is awesome","Who uses IRC anymore tbh","Windows should be illegal"]
-msg_array={"when":"We meet at wednesdays at 5 PM at Au Sable","count":"We have around 20 members","prez":"Prithaj","vprez":"Alex"}
+msg_array={"projects":"We worked on an online whiteboard last semester","hey":"Hello!","thnx":"No problem","when":"We meet at wednesdays at 5 PM at Au Sable","count":"We have around 20 members","prez":"Prithaj","vprez":"Alex"}
 
 
 @app.route('/', methods=['GET'])
@@ -43,17 +43,27 @@ def webhook():
                     recipient_id = messaging_event["recipient"]["id"]  # the recipient's ID, which should be your page's facebook ID
                     message_text = str(messaging_event["message"]["text"])  # the message's text
 
-                    if "when" in message_text:
+                    if ("when" in message_text) or ("When" in message_text):
                         send_message(sender_id, msg_array["when"])
-                    elif "president"in message_text:
-                        send_message(sender_id, msg_array["prez"])
+                    
                     elif "vice" in message_text:
                         send_message(sender_id, msg_array["vprez"])
+                    
+                    elif "president"in message_text:
+                        send_message(sender_id, msg_array["prez"])
+                    
                     elif "many" in message_text:
                         send_message(sender_id, msg_array["count"])
-                
+                    elif "hey" in message_text:
+                        send_message(sender_id,msg_array["hey"])
 
-                    
+                    elif ("thanks" in message_text) or ("Thanks" in message_text) or ("Thank you" in message_text):
+                        send_message(sender_id,msg_array["thnx"])
+                    elif "project" in message_text:
+                        send_message(sender_id,msg_array["projects"])
+
+                    else:
+                        send_message(sender_id,"I didn't get that. Could you repeat that please?")
 
                 if messaging_event.get("delivery"):  # delivery confirmation
                     pass
