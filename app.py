@@ -7,6 +7,7 @@ from flask import Flask, request
 
 app = Flask(__name__)
 
+# Fuck prithaj
 
 #mssg_array=["Fuck StackOverflow","I hate Java, do you?","JavaScript is awesome","Who uses IRC anymore tbh","Windows should be illegal"]
 msg_array={"projects":"We worked on an online whiteboard last semester","hey":"Hello!","thnx":"No problem","when":"We meet at wednesdays at 5 PM at Au Sable","count":"We have around 20 members","prez":"Prithaj","vprez":"Alex"}
